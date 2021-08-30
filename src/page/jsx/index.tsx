@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-curly-spacing */
 /* eslint-disable react/no-multi-comp */
 import React  from 'react'
-
 
 const toLearn = [ 'react' , 'vue' , 'webpack' , 'nodejs'  ]
 
@@ -121,11 +121,20 @@ class Index extends React.Component {
         </div>
         )
         const {children} = reactElement.props;
-        // const 
-        // React.Children.forEach(children, (item, index) => {
-
-        // })
+        const flatChildren = React.Children.toArray(children);
+        // const newChildren: ReactElement = [];
+        const newChildren: any = [];
+        React.Children.forEach(children, child => {
+            if (React.isValidElement(child)) newChildren.push(child);
+        })
         console.log('children: ', children);
+        console.log('flatChildren: ', flatChildren);
+        console.log('newChildren: ', newChildren);
+        const lastChild = React.createElement('div', {className: 'last'}, 'say goodbye');
+        newChildren.push(lastChild)
+        // const newReactElement = React.cloneElement(reactElement, {}, ...newChildren);
+        console.log('reactElement: ', reactElement);
+        // return newReactElement;
         return reactElement;
     }
     render () {
