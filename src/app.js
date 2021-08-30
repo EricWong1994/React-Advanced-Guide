@@ -155,7 +155,7 @@ export default  class Index extends React.Component{
   componentDidMount(){
     // console.log(this.node)
     // console.log(this)
-    console.log(this)
+    // console.log(this)
   }
 
   render(){

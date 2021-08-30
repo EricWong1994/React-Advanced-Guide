@@ -38,7 +38,7 @@ function logMiddleware() {
     /* 返回增强后的dispatch */
     return (action) => {
       const { type } = action
-      console.log('发生一次action:', type)
+      // console.log('发生一次action:', type)
       return next(action)
     }
   }

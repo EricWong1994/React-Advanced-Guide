@@ -80,10 +80,10 @@ class ComponentB extends React.Component{
       compBsay:''
    }
    componentDidMount(){
-       console.log(this.props)
+    //    console.log(this.props)
    }
    render(){
-       console.log('重新渲染')
+    //    console.log('重新渲染')
        const { compBsay } = this.state
        const {  mesA , object  } = this.props.Communi
        return <div className="box" >

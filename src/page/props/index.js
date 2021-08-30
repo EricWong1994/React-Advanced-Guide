@@ -114,7 +114,7 @@ function FatherComponent({ children }){
 }
 
 function SonComponent(props){
-    console.log(props)
+    // console.log(props)
     return <div>hello,world</div>
 }
 
@@ -195,7 +195,7 @@ class Form extends React.Component{
         const { children } = this.props
         const renderChildren = []
         React.Children.forEach(children,(child)=>{
-            console.log(child)
+            // console.log(child)
             if(child.type.__COMPONENT_TYPE === 'formItem'){
                 const { name } = child.props
                 const Children = React.cloneElement(child,{
@@ -217,7 +217,7 @@ export default  () => {
     const submit =()=>{
         /* 表单提交 */
         form.current.submitForm((formValue)=>{
-            console.log(formValue)
+            // console.log(formValue)
         })
     }
     const reset = ()=>{

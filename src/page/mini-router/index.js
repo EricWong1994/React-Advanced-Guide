@@ -41,14 +41,14 @@ function Menus() {
 function  Top() {
     /* 路由监听 */
     useListen((location)=>{
-        console.log( '当前路由是：', location.pathname)
+        // console.log( '当前路由是：', location.pathname)
     })
-    console.log(111)
+    // console.log(111)
     return <div>--------top------</div>
 }
 
 function Index() {
-    console.log('根组件渲染')
+    // console.log('根组件渲染')
     return <Router>
          <Top/>
         <Menus />
