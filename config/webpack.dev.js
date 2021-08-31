@@ -11,7 +11,7 @@ const devConfig = {
     historyApiFallback: true,
     publicPath: '/',
     port: 8888, /* 服务器端口 */
-    // host: 'dev.lemon.baidu.com',
+    host: 'dev.lemon.baidu.com',
     inline: true,
     proxy: {  /* 代理服务器 */
       // "/api": {
