@@ -1,5 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import React ,{ useState } from 'react'
+import { cloneElement } from 'react';
 
 
 
@@ -118,9 +119,75 @@ import React ,{ useState } from 'react'
 //         </div>
 //     }
 // }
+function Input({changeInputValue, value}) {
+    return <input
+        onChange={e => changeInputValue(e.target.value)}
+        value={value}
+    />
+}
+Input.displayName = 'input';
+function FormItem (props){
+    const {name, label, changeFormData, children, value} = props;
+    //key 打印不到undefined 查了一下 我分析 key 是一个不让读写的属性 
+    const changeInputValue = value => {
+        changeFormData(name, value);
+    }
+
+    return (<div>
+        <span>{label}:</span>
+        {React.isValidElement(children) && children.type.displayName === 'input' ? React.cloneElement(children, {
+            changeInputValue,
+            value
+        }) : null}
+    </div>)
+}
+FormItem.displayName = 'form-item';
+// span input 提及
+// - ②`Form`组件自动过滤掉除了`FormItem`之外的其他React元素
+// - ③`FormItem` 中 name 属性作为表单提交时候的 key ，还有展示的 label 。
+// - ④ `FormItem` 可以自动收集 `<Input/>` 表单的值。
 class Form extends React.Component {
     state = {formData: {}}
-    
+    submitForm = (callback) => {
+        callback(this.state.formData);
+    }
+    resetForm = () => {
+        const { formData } = this.state
+        Object.keys(formData).forEach(item=>{
+            formData[item] = ''
+        })
+        this.setState({
+            formData
+        })
+    }
+    changeFormData = (name, value) => {
+        console.log('name, value: ', name, value);
+        this.setState({
+            formData: {
+                ...this.state.formData,
+                [name]: value
+            }
+        })
+    }
+    render() {
+        const {children} = this.props;
+        const newChildren = [];
+        React.Children.forEach(children, (child) => {
+            if (child.type.displayName === 'form-item') {
+                const { name, label } = child.props
+
+                const Children = React.cloneElement(child, {
+                    label: label,
+                    key: name,
+                    value: this.state.formData[name] || '',
+                    changeFormData: this.changeFormData
+                }, child.props.children)
+                // }, child.children)
+                newChildren.push(Children);
+            }
+        })
+        return newChildren;
+    }
 }
 
 export default  () => {
@@ -128,7 +195,7 @@ export default  () => {
     const submit = () => {
         /* 表单提交 */
         form.current.submitForm((formValue)=>{
-            // console.log(formValue)
+            console.log('formValue: ', formValue);
         })
     }
     const reset = () => {
@@ -141,12 +208,13 @@ export default  () => {
                 name="name"
             >
                 <Input />
+                {/* <div>222</div> */}
             </FormItem>
-            {/* <FormItem label="我想对大家说"
+            <FormItem label="我想对大家说"
                 name="mes"
             >
                 <Input />
-            </FormItem> */}
+            </FormItem>
             <input placeholder="不需要的input"/>
             <Input />
         </Form>
