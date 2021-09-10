@@ -133,7 +133,7 @@ class Index extends React.Component{
         const { stateNumA ,stateNumB } = this.state
         return <div>
             <button onClick={ ()=> this.setState({ stateNumA: stateNumA + 1 }) } >改变state中numA</button>
-            <button onClick={ ()=> this.setState({ stateNumB: stateNumB + 1 }) } >改变state中numB</button>
+            <button onClick={ ()=> this.setState({ stateNumB: stateNumB + 1 }) } >改变stata中numB</button>
             <div>hello,let us learn React!</div>
         </div>
     }

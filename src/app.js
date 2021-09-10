@@ -12,8 +12,8 @@ import Hook from './page/hooks/index'
 import State from './page/state'
 import PropTest from './page/props/index'
 import Context from './page/context/index'
-// import Render from './page/render/index'
-import Render from './page/rendertwo/index'
+import Render from './page/render/index'
+import RenderTwo from './page/rendertwo/index'
 import BigData from './page/bigData/index'     /* 时间分片 */
 import VirtualList from './page/bigData/list'  /* 虚拟列表 */
 import RouterPage from './page/router/index'
@@ -74,7 +74,7 @@ const menusList = [
   {
     name:'12_渲染调优',
     path:'/renderTwo',
-    component:Render
+    component:RenderTwo
   },
 
   {

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import React, { useEffect, useState } from 'react'
 // import ReactDOM from 'react-dom'
 // import { SyncOutlined } from '@ant-design/icons'
@@ -359,7 +360,11 @@ class ScrollView extends React.Component{
     }
     /* 获取更新后容器高度 */
     componentDidUpdate(prevProps, prevState, snapshot){
+        console.log('prevProps: ', prevProps);
+        console.log('prevState: ', prevState);
         console.log('scrollView容器高度变化:' , this.node.scrollHeight - snapshot  )
+        console.log('this.node.scrollHeight: ', this.node.scrollHeight);
+        console.log('snapshot: ', snapshot);
     }
     /* 绑定事件监听器 - 监听scorll事件 */
     componentDidMount() {
@@ -372,7 +377,8 @@ class ScrollView extends React.Component{
     render() {
         const { list } = this.state
         const { component } = this.props
-        return <div className="list_box"  ref={(node) => this.node = node }  >
+        // return <div className="list_box"  ref={(node) => this.node = node }  >
+        return <div className="list_box_lifecycle"  ref={(node) => this.node = node }  >
             <div >     
                 {
                     list.map((item) => (
@@ -390,7 +396,8 @@ export default function () {
     const getData = async ()=>{
         if(data.page === data.pageCount) return console.log('没有数据了～')
         const res = await fetchData(data.page + 1)
-        if(res.code === 0) setData({
+        // if(res.code === 0) setData({
+        if(res.code === 200) setData({
             ...res,
             list:res.page === 1 ?  res.list : data.list.concat(res.list) 
         })
@@ -404,6 +411,7 @@ export default function () {
     useEffect(()=>{
         getData()
     },[])
+
     return <ScrollView 
             data={ data } 
             component={ Item }  /* Item 渲染的单元组件 */
