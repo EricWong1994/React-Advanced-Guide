@@ -16,9 +16,11 @@ function VirtualList() {
 		renderCount: 0 /* 渲染区个数 */,
 	});
 	React.useEffect(() => {
-		const height = box.current.offsetHeight;
+		const height = box.current.offsetHeight; // 909
+		console.log('height: ', height);
 		const { itemHeight, bufferCount } = scrollInfo.current;
-		const renderCount = Math.ceil(height / itemHeight) + bufferCount;
+		const renderCount = Math.ceil(height / itemHeight) + bufferCount; // 24
+		console.log('renderCount: ', renderCount);
 		scrollInfo.current = { renderCount, height, bufferCount, itemHeight };
 		const dataList = new Array(10000)
 			.fill(1)
@@ -27,6 +29,7 @@ function VirtualList() {
 		setPosition([0, renderCount]);
 	}, []);
 	const handleScroll = () => {
+		console.dir(scroll.current);
 		const { scrollTop } = scroll.current;
 		const { itemHeight, renderCount } = scrollInfo.current;
 		const currentOffset = scrollTop - (scrollTop % itemHeight);
