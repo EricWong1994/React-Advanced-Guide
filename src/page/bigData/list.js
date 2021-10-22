@@ -1,19 +1,21 @@
-import React from 'react'
-import './style.scss'
+import React from 'react';
+import './style.scss';
 
-function VirtualList(){
-   const [ dataList,setDataList ] = React.useState([])  /* 保存数据源 */
-   const [ position , setPosition ] = React.useState([0,0]) /* 截取缓冲区 + 视图区索引 */
-   const scroll = React.useRef(null)
-   const box = React.useRef(null)
-   const context = React.useRef(null)
-   const scrollInfo = React.useRef({
+function VirtualList() {
+	const [dataList, setDataList] = React.useState([]); /* 保存数据源 */
+	const [position, setPosition] = React.useState([
+		0, 0,
+	]); /* 截取缓冲区 + 视图区索引 */
+	const scroll = React.useRef(null);
+	const box = React.useRef(null);
+	const context = React.useRef(null);
+	const scrollInfo = React.useRef({
 		height: 500 /* 容器高度 */,
 		bufferCount: 8 /* 缓冲区个数 */,
 		itemHeight: 60 /* 每一个item高度 */,
 		renderCount: 0 /* 渲染区个数 */,
-   });
-   React.useEffect(() => {
+	});
+	React.useEffect(() => {
 		const height = box.current.offsetHeight;
 		const { itemHeight, bufferCount } = scrollInfo.current;
 		const renderCount = Math.ceil(height / itemHeight) + bufferCount;
@@ -23,8 +25,8 @@ function VirtualList(){
 			.map((item, index) => index + 1);
 		setDataList(dataList);
 		setPosition([0, renderCount]);
-   }, []);
-   const handleScroll = () => {
+	}, []);
+	const handleScroll = () => {
 		const { scrollTop } = scroll.current;
 		const { itemHeight, renderCount } = scrollInfo.current;
 		const currentOffset = scrollTop - (scrollTop % itemHeight);
@@ -35,12 +37,12 @@ function VirtualList(){
 			/* 如果render内容发生改变，那么截取  */
 			setPosition([start, end]);
 		}
-   };
-   const { itemHeight, height } = scrollInfo.current;
-   const [start, end] = position;
-   const renderList = dataList.slice(start, end);
-   console.log('渲染区间', position);
-   return (
+	};
+	const { itemHeight, height } = scrollInfo.current;
+	const [start, end] = position;
+	const renderList = dataList.slice(start, end);
+	console.log('渲染区间', position);
+	return (
 		<div className='list_box' ref={box}>
 			<div
 				className='scroll_box'
@@ -62,7 +64,7 @@ function VirtualList(){
 				</div>
 			</div>
 		</div>
-   );
+	);
 }
 
-export default VirtualList
+export default VirtualList;
