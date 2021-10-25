@@ -1,7 +1,7 @@
 import React from 'react'
 
 // export default function Index(){
-//     const handleClick=()=>{ console.log('模拟冒泡阶段执行') } 
+//     const handleClick=()=>{ console.log('模拟冒泡阶段执行') }
 //     const handleClickCapture = ()=>{ console.log('模拟捕获阶段执行') }
 //     return <div>
 //         <button onClick={ handleClick } onClickCapture={ handleClickCapture }  >点击</button>
@@ -39,7 +39,11 @@ export default function Index(){
     const handleClick2 = () => console.log(2)
     const handleClick3 = () => console.log(3)
     const handleClick4 = () => console.log(4)
-    return <div onClick={ handleClick3 }  onClickCapture={ handleClick4 }  >
-        <button onClick={ handleClick1 }  onClickCapture={ handleClick2 }  ></button>
+    return <div onClick={handleClick3}
+onClickCapture={handleClick4}
+           >
+        <button onClick={handleClick1}
+onClickCapture={handleClick2}
+        >点击</button>
     </div>
 }
