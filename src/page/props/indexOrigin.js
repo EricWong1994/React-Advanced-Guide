@@ -199,11 +199,15 @@ class Form extends React.Component{
             // console.log(child)
             if(child.type.__COMPONENT_TYPE === 'formItem'){
                 const { name } = child.props
-                const Children = React.cloneElement(child,{
-                    key:name ,
-                    handleChange:this.setValue ,
-                    value:this.state.formData[name] ||  ''
-                },child.props.children)
+                const Children = React.cloneElement(
+					child,
+					{
+						key: name,
+						handleChange: this.setValue,
+						value: this.state.formData[name] || '',
+					},
+					child.props.children
+				);
                 renderChildren.push(Children)
             }
         })

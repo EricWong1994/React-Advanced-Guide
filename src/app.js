@@ -10,7 +10,8 @@ import Components from './page/component/index'
 import ReactRedux from './page/react-redux'
 import Hook from './page/hooks/index'
 import State from './page/state'
-import PropTest from './page/props/index'
+import PropTest from './page/props/index.jsx'
+import PropIndex from './page/props/index.jsx';
 import Context from './page/context/index'
 import Render from './page/render/index'
 import RenderTwo from './page/rendertwo/index'
@@ -49,7 +50,8 @@ const menusList = [
   {
     name:'5_爱恨props',
     path:'/props',
-    component:PropTest
+    // component:PropTest
+    component: PropIndex
   },
   {
     name: '6_生命周期',

@@ -123,13 +123,14 @@ function Input({changeInputValue, value}) {
     return <input
         onChange={e => changeInputValue(e.target.value)}
         value={value}
-    />
+           />
 }
 Input.displayName = 'input';
 function FormItem (props){
     const {name, label, changeFormData, children, value} = props;
-    //key 打印不到undefined 查了一下 我分析 key 是一个不让读写的属性 
+    //key 打印不到undefined 查了一下 我分析 key 是一个不让读写的属性
     const changeInputValue = value => {
+        console.log('value: ', value);
         changeFormData(name, value);
     }
 
