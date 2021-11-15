@@ -30,7 +30,6 @@ class Form extends React.Component {
 		formData: {},
 	};
 	componentDidMount() {
-		// const { children } = this.props;
 		this.renderControl();
 	}
 
